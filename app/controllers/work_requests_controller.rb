@@ -9,6 +9,9 @@ class WorkRequestsController < ApplicationController
     @work_request = WorkRequest
       .includes(:business, :required_skill, assignments: :staff_member)
       .find(params[:id])
+    @staff_members = StaffMember
+      .includes(:skills, :availabilities)
+      .order(:name)
   end
 
   def edit
