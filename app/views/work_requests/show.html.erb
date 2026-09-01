@@ -54,18 +54,26 @@
         </dd>
       </div>
 
-      <div>
-        <dt>必要スキル</dt>
-        <dd>
-          <%= @work_request.required_skill&.name ||
-              "指定なし" %>
-        </dd>
-      </div>
 
       <div>
         <dt>割当済み</dt>
         <dd>
           <%= @work_request.assignments.size %>名
+        </dd>
+      </div>
+
+      <div>
+        <dt>不足人数</dt>
+        <dd>
+          <%= @work_request.staffing_shortage_count %>名
+        </dd>
+      </div>
+
+      <div>
+        <dt>必要スキル</dt>
+        <dd>
+          <%= @work_request.required_skill&.name ||
+              "指定なし" %>
         </dd>
       </div>
     </dl>
