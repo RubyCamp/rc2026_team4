@@ -54,26 +54,18 @@
         </dd>
       </div>
 
-
-      <div>
-        <dt>割当済み</dt>
-        <dd>
-          <%= @work_request.assignments.size %>名
-        </dd>
-      </div>
-
-      <div>
-        <dt>不足人数</dt>
-        <dd>
-          <%= @work_request.staffing_shortage_count %>名
-        </dd>
-      </div>
-
       <div>
         <dt>必要スキル</dt>
         <dd>
           <%= @work_request.required_skill&.name ||
               "指定なし" %>
+        </dd>
+      </div>
+
+      <div>
+        <dt>割当済み</dt>
+        <dd>
+          <%= @work_request.assignments.size %>名
         </dd>
       </div>
     </dl>
@@ -124,27 +116,6 @@
           </li>
         <% end %>
       </ul>
-    <% else %>
-      <p class="mb-0 text-body-secondary">
-        まだスタッフは割り当てられていません。
-      </p>
-    <% end %>
-  </div>
-</section>
-
-<section class="card shadow-sm">
-  <div class="card-body">
-    <h2 class="h4 card-title">
-      候補者名
-    </h2>
-
-    <% if @work_request.staffing_shortage_count >= 1 %>
-      <% @staff_members.each do |staff_member| %>
-        <strong>
-          <%= staff_member.name %>
-        </strong>
-      <% end %>
-
     <% else %>
       <p class="mb-0 text-body-secondary">
         まだスタッフは割り当てられていません。
