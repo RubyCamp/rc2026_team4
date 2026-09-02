@@ -131,6 +131,8 @@
     <% end %>
   </div>
 </section>
+
+<% unless @work_request.staffing_sufficient? %>
 <section class="card shadow-sm">
   <div class="card-body">
     <h2 class="h4 card-title">
@@ -151,3 +153,4 @@
     <% end %>
   </div>
 </section>
+<% end %>
