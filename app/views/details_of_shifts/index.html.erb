@@ -14,6 +14,24 @@
   </p>
 </div>
 
+<div class="row">
+
+  <div class="col-sm-4">
+    勤務依頼件数
+    <strong><%= @work_requests.count %></strong>
+  </div>
+
+  <div class="col-sm-4">
+    不足依頼数
+    <strong class="text-danger"><%= @work_requests.count {|work_request| !work_request.staffing_sufficient? } %></strong>
+  </div>
+
+  <div class="col-sm-4">
+    不足人数
+    <strong class="text-danger"><%= @work_requests.sum(&:staffing_shortage_count) %></strong>
+  </div>
+</div>
+
 <% if @work_requests.any? %>
   <div class="row g-4">
     <table class="table table-bordered">
