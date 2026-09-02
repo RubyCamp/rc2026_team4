@@ -16,78 +16,35 @@
 
 <% if @work_requests.any? %>
   <div class="row g-4">
-    <% @work_requests.each do |work_request| %>
-      <div class="col-12 col-md-6 col-xl-4">
-        <article
-          class="card work-request-card h-100 shadow-sm"
-        >
-          <div class="card-body">
-            <div
-              class="
-                d-flex
-                justify-content-between
-                align-items-center
-                gap-3
-                mb-3
-              "
-            >
-              <span class="badge text-bg-primary">
-                <%= enum_label(work_request, :status) %>
-              </span>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>ステータス</th>
+          <th>依頼名</th>
+          <th>事業者</th>
+          <th>必要人数</th>
+          <th>割当済み</th>
+          <th>不足人数</th>
+          <th>必要スキル</th>
+          <th>開始日時</th>
+        </tr>
+      </thead>
 
-              <small class="text-body-secondary">
-                <%= l work_request.starts_at,
-                      format: :short %>
-              </small>
-            </div>
-
-            <h2 class="h5 card-title">
-              <%= link_to(
-                    work_request.title,
-                    details_of_shift_path(work_request),
-                    class: "link-dark stretched-link"
-                  ) %>
-            </h2>
-
-            <dl class="definition-list mb-0">
-              <div>
-                <dt>事業者</dt>
-                <dd><%= work_request.business.name %></dd>
-              </div>
-
-              <div>
-                <dt>必要人数</dt>
-                <dd>
-                  <%= work_request.required_staff_count %>名
-                </dd>
-              </div>
-
-              <div>
-                <dt>割当済み</dt>
-                <dd>
-                  <%= work_request.assignments.size %>名
-                </dd>
-              </div>
-
-              <div>
-                <dt>不足人数</dt>
-                <dd>
-                  <%= work_request.staffing_shortage_count %>名
-                </dd>
-              </div>
-
-              <div>
-                <dt>必要スキル</dt>
-                <dd>
-                  <%= work_request.required_skill&.name ||
-                      "指定なし" %>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </article>
-      </div>
-    <% end %>
+      <tbody>
+        <% @work_requests.each do |work_request| %>
+          <tr>
+            <td><%= enum_label(work_request, :status) %></td>
+            <td><%= link_to work_request.title, details_of_shift_path(work_request) %></td>
+            <td><%= work_request.business.name %></td>
+            <td><%= work_request.required_staff_count %></td>
+            <td><%= work_request.assignments.size %></td>
+            <td><%= work_request.staffing_shortage_count %></td>
+            <td><%= work_request.required_skill&.name || "指定なし" %></td>
+            <td><%= l work_request.starts_at, format: :short %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% else %>
   <div class="alert alert-info">
