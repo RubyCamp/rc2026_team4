@@ -3,7 +3,7 @@
 <p>
   <%= link_to(
         "勤務依頼一覧へ戻る",
-        work_requests_path,
+        details_of_shifts_path,
         class: "link-secondary"
       ) %>
 </p>
@@ -127,6 +127,26 @@
     <% else %>
       <p class="mb-0 text-body-secondary">
         まだスタッフは割り当てられていません。
+      </p>
+    <% end %>
+  </div>
+</section>
+<section class="card shadow-sm">
+  <div class="card-body">
+    <h2 class="h4 card-title">
+      候補者名
+    </h2>
+
+    <% if @work_request.staffing_shortage_count >= 1 %>
+      <% @staff_members.each do |staff_member| %>
+        <strong>
+          <%= staff_member.name %>
+        </strong>
+      <% end %>
+
+    <% else %>
+      <p class="mb-0 text-body-secondary">
+        不足していません。
       </p>
     <% end %>
   </div>
