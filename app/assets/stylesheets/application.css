@@ -16,6 +16,12 @@
 
 body {
   min-height: 100vh;
+    font-family:
+    "Noto Sans JP",
+    "Yu Gothic",
+    "Hiragino Kaku Gothic ProN",
+    Meiryo,
+    sans-serif;
 }
 
 .page-lead {
