@@ -1,9 +1,34 @@
 class DetailsOfShiftsController < ApplicationController
-  def index
-    @work_requests = WorkRequest
-      .includes(:business, :required_skill, assignments: :staff_member)
-      .order(:starts_at)
+def index
+  @work_requests = WorkRequest
+    .includes(:business, :required_skill, assignments: :staff_member)
+    .order(:starts_at)
+
+  if params[:keyword].present?
+    keyword = "%#{params[:keyword]}%"
+
+    @work_requests = @work_requests
+      .joins(:business, :required_skill)
+      .where(
+        "work_requests.title ILIKE :keyword
+         OR businesses.name ILIKE :keyword
+         OR skills.name ILIKE :keyword",
+        keyword: keyword
+      )
   end
+  if params[:shortage].present?
+    case params[:shortage]
+    when "yes"
+      @work_requests = @work_requests.select do |work_request|
+        work_request.staffing_shortage_count > 0
+      end
+    when "no"
+      @work_requests = @work_requests.select do |work_request|
+        work_request.staffing_shortage_count == 0
+      end
+    end
+  end
+end
 
   def show
     @work_request = WorkRequest
