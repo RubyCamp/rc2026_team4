@@ -16,7 +16,7 @@ def index
         keyword: keyword
       )
   end
-    if params[:shortage].present?
+  if params[:shortage].present?
     case params[:shortage]
     when "yes"
       @work_requests = @work_requests.select do |work_request|
