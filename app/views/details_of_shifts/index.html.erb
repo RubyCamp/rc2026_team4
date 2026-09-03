@@ -12,6 +12,43 @@
   <p class="page-lead text-body-secondary">
     依頼内容と現在の割当状況を確認できます。
   </p>
+
+  <div class="card my-4">
+    <div class="card-body">
+      <h2 class="h5 mb-3">勤務依頼を検索</h2>
+
+      <%= form_with url: details_of_shifts_path, method: :get, local: true do |form| %>
+        <div class="row g-3 align-items-end">
+          <div class="col-md-8">
+            <%= form.label :keyword, "キーワード", class: "form-label" %>
+            <%= form.text_field :keyword,
+                                value: params[:keyword],
+                                class: "form-control",
+                                placeholder: "依頼名・事業者名・必要スキル" %>
+          </div>
+
+          <div class="col-md-4">
+            <%= form.label :shortage, "不足人数", class: "form-label" %>
+            <%= form.select :shortage,
+                            options_for_select(
+                              [
+                                ["すべて", ""],
+                                ["不足あり", "yes"],
+                                ["不足なし", "no"]
+                              ],
+                              params[:shortage]
+                            ),
+                            {},
+                            class: "form-select" %>
+          </div>
+
+          <div class="col-12 text-center">
+            <%= form.submit "検索", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <div class="row">
