@@ -50,7 +50,7 @@
 
       <tbody>
         <% @work_requests.each do |work_request| %>
-          <tr>
+          <tr class="clickable-row" data-controller="clickable-row" data-clickable-row-url-value="<%= details_of_shift_path(work_request) %>" data-action="click->clickable-row#navigate keydown->clickable-row#navigate" tabindex="0">
             <td><span class="badge text-bg-info"><%= enum_label(work_request, :status) %></span>
             <% unless work_request.staffing_sufficient? %>
               <span class="badge text-bg-danger">required</span>

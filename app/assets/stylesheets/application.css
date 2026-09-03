@@ -52,3 +52,7 @@ body {
   margin: 0;
   text-align: right;
 }
+
+.clickable-row {
+  cursor: pointer;
+}
